@@ -60,10 +60,8 @@ namespace webapi.Controllers
                 return NotFound();
             }
 
-            // Обновляем поля объекта existingPerson на основе переданного updatedPerson
             existingPerson.Name = updatedPerson.Name;
             existingPerson.Surname = updatedPerson.Surname;
-            // Обновите другие поля в соответствии с вашей логикой
 
             _db.Persons.Update(existingPerson);
             _db.SaveChanges();

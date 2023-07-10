@@ -51,10 +51,8 @@ namespace webapi.Controllers
                 return BadRequest("Invalid PersonId");
             }
 
-            // Получение списка объектов Diagnose по их идентификаторам
             var diagnoses = _db.Diagnoses.Where(d => data.DiagnoseIds.Contains(d.Id)).ToList();
 
-            // Создание объекта Patient и привязка полученных объектов
             var patient = new Patient
             {
                 PersonId = data.PersonId,
@@ -78,17 +76,14 @@ namespace webapi.Controllers
                 return NotFound();
             }
 
-            // Получение объекта Person по его идентификатору
             var person = _db.Persons.FirstOrDefault(p => p.Id == request.PersonId);
             if (person == null)
             {
                 return BadRequest("Invalid PersonId");
             }
 
-            // Получение списка объектов Diagnose по их идентификаторам
             var diagnoses = _db.Diagnoses.Where(d => request.DiagnoseIds.Contains(d.Id)).ToList();
 
-            // Обновление полей существующего пациента
             existingPatient.PersonId = request.PersonId;
             existingPatient.Person = person;
             existingPatient.Diagnoses = diagnoses;
